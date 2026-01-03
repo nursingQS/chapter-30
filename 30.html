@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pediatric Nursing Flashcards - Chapter 30: Cerebral Dysfunction</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c2461 0%, #1e3799 100%);
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            height: 96vh;
+            background: #f0f8ff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #4a69bd;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0c2461, #1e3799);
+            color: white;
+            padding: 12px 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M50,5 C70,5 85,20 85,40 C85,60 70,75 50,75 C30,75 15,60 15,40 C15,20 30,5 50,5 Z" fill="white"/><path d="M50,20 C40,20 30,30 30,40 C30,50 40,60 50,60 C60,60 70,50 70,40 C70,30 60,20 50,20 Z" fill="white"/></svg>');
+            background-size: 80px 80px;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+            position: relative;
+            color: #e6f7ff;
+            line-height: 1.2;
+        }
+        
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            color: #c8e6ff;
+            margin-bottom: 8px;
+        }
+        
+        .progress {
+            background: #0c2461;
+            height: 6px;
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #4a69bd, #6a89cc);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .section-nav {
+            display: flex;
+            gap: 6px;
+            padding: 8px 10px;
+            background: linear-gradient(135deg, #1e3799, #0c2461);
+            border-bottom: 1px solid #4a69bd;
+            flex-shrink: 0;
+            overflow-x: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-btn {
+            padding: 5px 10px;
+            border: 2px solid #4a69bd;
+            background: rgba(255,255,255,0.95);
+            color: #0c2461;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(74, 105, 189, 0.4);
+        }
+        
+        .section-btn.active {
+            background: linear-gradient(135deg, #4a69bd, #6a89cc);
+            color: white;
+            border-color: #0c2461;
+            box-shadow: 0 6px 12px rgba(74, 105, 189, 0.5);
+        }
+        
+        .flashcard {
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f0f8ff;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .question-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 6px solid #4a69bd;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            flex-shrink: 0;
+        }
+        
+        .question-icon {
+            background: linear-gradient(135deg, #0c2461, #4a69bd);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(12, 36, 97, 0.4);
+        }
+        
+        .question {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #2c3e50;
+            flex-grow: 1;
+            font-weight: 500;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        .multiple-select-indicator {
+            background: #e55039;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 6px;
+            white-space: nowrap;
+            box-shadow: 0 3px 6px rgba(229, 80, 57, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 8px;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .option {
+            padding: 8px 10px;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            flex-shrink: 0;
+            min-height: 45px;
+        }
+        
+        .option:hover {
+            background: #e6f2ff;
+            border-color: #6a89cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(106, 137, 204, 0.2);
+        }
+        
+        .option-letter {
+            background: #e6f2ff;
+            color: #0c2461;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            border: 2px solid #b8d4ff;
+        }
+        
+        /* CORRECT - ALWAYS GREEN */
+        .option.correct {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+        
+        .option.correct .option-letter {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+        
+        /* INCORRECT - ALWAYS RED */
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+        
+        .option.selected {
+            background: #e6f2ff;
+            border-color: #4a69bd;
+            color: #0c2461;
+        }
+        
+        .option.selected .option-letter {
+            background: #4a69bd;
+            color: white;
+            border-color: #0c2461;
+        }
+        
+        .feedback {
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .feedback.correct {
+            background: #e8f5e9;
+            border: 3px solid #4caf50;
+            color: #2e7d32;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: #ffebee;
+            border: 3px solid #f44336;
+            color: #c62828;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: #e6f2ff;
+            border-top: 2px solid #b8d4ff;
+            flex-shrink: 0;
+            gap: 8px;
+        }
+        
+        .counter {
+            font-weight: bold;
+            color: #0c2461;
+            font-size: 0.9rem;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 2px solid #4a69bd;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0c2461, #4a69bd);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(12, 36, 97, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #6a89cc, #0c2461);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(106, 137, 204, 0.4);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: #212529;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(255, 152, 0, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(244, 67, 54, 0.4);
+        }
+        
+        .rationale {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 8px;
+            display: none;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+            flex-shrink: 0;
+            overflow: hidden;
+            max-height: 120px;
+        }
+        
+        .rationale.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .rationale h4 {
+            color: #ef6c00;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .rationale p {
+            color: #e65100;
+            line-height: 1.4;
+            font-size: 0.8rem;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stats {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 4px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+        
+        .stat {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .cancel-selection {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+            margin: 0 auto 8px auto;
+            display: none;
+            box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .cancel-selection:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(244, 67, 54, 0.4);
+        }
+        
+        .cancel-selection.show {
+            display: flex;
+        }
+        
+        .multiple-select-instructions {
+            text-align: center;
+            color: #e55039;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            background: #fff9c4;
+            padding: 6px;
+            border-radius: 8px;
+            border: 2px solid #fff59d;
+            flex-shrink: 0;
+        }
+        
+        .matching-container {
+            background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+            border-radius: 8px;
+            padding: 10px;
+            border: 2px solid #dfe6e9;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .matching-question {
+            font-size: 0.85rem;
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #dfe6e9;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            max-height: 3em;
+            flex-shrink: 0;
+        }
+        
+        .matching-options {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 5px;
+            overflow: hidden;
+            padding: 2px;
+            min-height: 0;
+        }
+        
+        .matching-option {
+            padding: 8px;
+            border: 2px dashed #6a89cc;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4a69bd;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            overflow: hidden;
+            line-height: 1.2;
+        }
+        
+        .matching-option:hover {
+            background: #f3f7ff;
+            border-style: solid;
+            border-color: #4a69bd;
+        }
+        
+        .matching-option.correct {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-color: #4caf50;
+            border-style: solid;
+            color: #2e7d32;
+        }
+        
+        .matching-option.incorrect {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-color: #f44336;
+            border-style: solid;
+            color: #c62828;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* Remove all scrollbars */
+        .options,
+        .matching-options,
+        .rationale,
+        .container,
+        .flashcard,
+        body {
+            overflow: hidden !important;
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+        
+        .options::-webkit-scrollbar,
+        .matching-options::-webkit-scrollbar,
+        .rationale::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                height: 98vh;
+            }
+            
+            .section-btn {
+                min-width: 100px;
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+            
+            .matching-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 10px 12px;
+            }
+            
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .navigation {
+                padding: 8px 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px;
+            }
+            
+            .counter {
+                order: -1;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 4px;
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .question {
+                font-size: 0.85rem;
+            }
+            
+            .option {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+                min-height: 40px;
+            }
+            
+            .question-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .option-letter {
+                width: 22px;
+                height: 22px;
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .container {
+                height: 99vh;
+            }
+            
+            .header {
+                padding: 8px 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.1rem;
+            }
+            
+            .header .subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .question-container {
+                padding: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .question {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+            
+            .option {
+                padding: 6px 8px;
+                min-height: 35px;
+                font-size: 0.75rem;
+            }
+            
+            .navigation {
+                padding: 6px 8px;
+            }
+            
+            .rationale {
+                max-height: 80px;
+                padding: 8px;
+            }
+            
+            .feedback {
+                padding: 6px 8px;
+                font-size: 0.75rem;
+            }
+            
+            .option-letter {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+            
+            .stats {
+                display: none;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .question-container {
+                padding: 8px;
+            }
+            
+            .question-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            
+            .option {
+                min-height: 30px;
+                padding: 4px 6px;
+                font-size: 0.7rem;
+            }
+            
+            .option-letter {
+                width: 18px;
+                height: 18px;
+                font-size: 0.65rem;
+            }
+            
+            .btn {
+                padding: 5px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .rationale {
+                max-height: 60px;
+                padding: 6px;
+            }
+            
+            .rationale p {
+                font-size: 0.7rem;
+                line-height: 1.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Chapter 30: The Child with Cerebral Dysfunction</h1>
+            <div class="subtitle">Neurological Nursing Flashcards - Brain & Nervous System Theme</div>
+            <div class="stats">
+                <div class="stat">📚 50 MC + 14 MR + 9 Matching</div>
+                <div class="stat">🎯 Immediate Feedback</div>
+                <div class="stat">✅ Green/Red System</div>
+                <div class="stat">🔄 Multiple Question Types</div>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="section-nav">
+            <button class="section-btn active" onclick="setSection('multiple-choice')">Multiple Choice (50)</button>
+            <button class="section-btn" onclick="setSection('multiple-response')">Multiple Response (14)</button>
+            <button class="section-btn" onclick="setSection('matching')">Matching (9)</button>
+            <button class="section-btn" onclick="setSection('dosage')">Dosage Calculations (4)</button>
+            <button class="section-btn" onclick="setSection('all')">All Mixed (77)</button>
+        </div>
+        
+        <div class="flashcard">
+            <div class="question-container">
+                <div class="question-icon" id="questionNumber">1</div>
+                <div class="question" id="question"></div>
+                <div class="multiple-select-indicator" id="multipleSelectIndicator" style="display: none;">Multiple Answers</div>
+            </div>
+            
+            <div class="multiple-select-instructions" id="multipleSelectInstructions" style="display: none;">
+                💡 Select ALL correct answers
+            </div>
+            
+            <div class="options" id="options"></div>
+            
+            <div class="matching-container" id="matchingContainer" style="display: none;">
+                <div class="matching-question" id="matchingQuestion"></div>
+                <div class="matching-options" id="matchingOptions"></div>
+            </div>
+            
+            <button class="btn cancel-selection" id="cancelBtn" onclick="cancelSelection()">
+                🔄 Reset
+            </button>
+            
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>💡 Rationale:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+                ⬅️ Prev
+            </button>
+            <div class="counter" id="counter">1/50</div>
+            <button class="btn btn-warning" id="submitBtn" onclick="submitAnswer()" style="display: none;">
+                ✅ Submit
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Chapter 30 Data - Cerebral Dysfunction
+        const sections = {
+            'multiple-choice': [
+                {
+                    question: "An injury to which part of the brain will cause a coma?",
+                    options: ["Brainstem", "Cerebrum", "Cerebellum", "Occipital lobe"],
+                    correct: 0,
+                    rationale: "Injury to the brainstem results in stupor and coma. Signs of damage to the cerebrum are specific to the involved area. Individuals with frontal lobe injury may have impaired memory, personality changes, or altered intellectual functioning. Individuals with damage to the cerebellum have difficulties with coordination of muscle movements, including ataxia and nystagmus. Impaired vision and functional blindness result from injury to the occipital lobe."
+                },
+                {
+                    question: "What finding is a clinical manifestation of increased intracranial pressure (ICP) in children?",
+                    options: ["Low-pitched cry", "Sunken fontanel", "Diplopia, blurred vision", "Increased blood pressure"],
+                    correct: 2,
+                    rationale: "Diplopia and blurred vision are signs of increased ICP in children. A high-pitched cry and a tense or bulging fontanel are characteristic of increased ICP. Increased blood pressure, common in adults, is rarely seen in children."
+                },
+                {
+                    question: "What are quick, jerky, grossly uncoordinated, irregular movements that may disappear on relaxation called?",
+                    options: ["Twitching", "Spasticity", "Choreiform movements", "Associated movements"],
+                    correct: 2,
+                    rationale: "Quick, jerky, grossly uncoordinated, irregular movements that may disappear on relaxation are called choreiform movements. Twitching is defined as spasmodic movements of short duration. Spasticity is the prolonged and steady contraction of a muscle characterized by clonus (alternating relaxation and contraction of the muscle) and exaggerated reflexes. Associated movements are the voluntary movement of one muscle accompanied by the involuntary movement of another muscle."
+                },
+                {
+                    question: "What term is used when a patient remains in a deep sleep, responsive only to vigorous and repeated stimulation?",
+                    options: ["Coma", "Stupor", "Obtundation", "Persistent vegetative state"],
+                    correct: 1,
+                    rationale: "Stupor exists when the child remains in a deep sleep, responsive only to vigorous and repeated stimulation. Coma is the state in which no motor or verbal response occurs to noxious (painful) stimuli. Obtundation describes a level of consciousness in which the child is arousable with stimulation. Persistent vegetative state describes the permanent loss of function of the cerebral cortex."
+                },
+                {
+                    question: "What term is used to describe a child's level of consciousness when the child is arousable with stimulation?",
+                    options: ["Stupor", "Confusion", "Obtundation", "Disorientation"],
+                    correct: 2,
+                    rationale: "Obtundation describes a level of consciousness in which the child is arousable with stimulation. Stupor is a state in which the child remains in a deep sleep, responsive only to vigorous and repeated stimulation. Confusion is impaired decision making. Disorientation is confusion regarding time and place."
+                },
+                {
+                    question: "The nurse is closely monitoring a child who is unconscious after a fall and notices that the child suddenly has a fixed and dilated pupil. How should the nurse interpret this?",
+                    options: ["Eye trauma", "Brain death", "Severe brainstem damage", "Neurosurgical emergency"],
+                    correct: 3,
+                    rationale: "The sudden appearance of a fixed and dilated pupil(s) is a neurosurgical emergency. The nurse should immediately report this finding. Although a dilated pupil may be associated with eye trauma, this child has experienced a neurologic insult. One fixed and dilated pupil is not suggestive of brain death. Pinpoint pupils or fixed, bilateral pupils for more than 5 minutes are indicative of brainstem damage. The unilateral fixed and dilated pupil is suggestive of damage on the same side of the brain."
+                },
+                {
+                    question: "The nurse is caring for a child with severe head trauma after a car accident. What is an ominous sign that often precedes death?",
+                    options: ["Delirium", "Papilledema", "Flexion posturing", "Periodic or irregular breathing"],
+                    correct: 3,
+                    rationale: "Periodic or irregular breathing is an ominous sign of brainstem (especially medullary) dysfunction that often precedes complete apnea. Delirium is a state of mental confusion and excitement marked by disorientation for time and place. Papilledema is edema and inflammation of the optic nerve. It is commonly a sign of increased intracranial pressure. Flexion posturing is seen with severe dysfunction of the cerebral cortex or of the corticospinal tracts above the brainstem."
+                },
+                {
+                    question: "What test is never performed on a child who is awake?",
+                    options: ["Doll's head maneuver", "Oculovestibular response", "Assessment of pyramidal tract lesions", "Funduscopic examination for papilledema"],
+                    correct: 1,
+                    rationale: "The oculovestibular response (caloric test) involves the instillation of ice water into the ear of a comatose child. The caloric test is painful and is never performed on an awake child or one who has a ruptured tympanic membrane. The doll's head maneuver, assessment of pyramidal tract lesions, and funduscopic examination for papilledema are not considered painful and can be performed on awake children."
+                },
+                {
+                    question: "The nurse is doing a neurologic assessment on a 2-month-old infant after a car accident. Moro, tonic neck, and withdrawal reflexes are present. How should the nurse interpret these findings?",
+                    options: ["Neurologic health", "Severe brain damage", "Decorticate posturing", "Decerebrate posturing"],
+                    correct: 0,
+                    rationale: "Moro, tonic neck, and withdrawal reflexes are three reflexes that are present in a healthy 2-month-old infant and are expected in this age group."
+                },
+                {
+                    question: "The nurse is preparing a school-age child for computed tomography (CT) scan to assess cerebral function. The nurse should include what statement in preparing the child?",
+                    options: ["The scan will not hurt.", "Pain medication will be given.", "You will be able to move once the equipment is in place.", "Unfortunately no one can remain in the room with you during the test."],
+                    correct: 0,
+                    rationale: "For CT scans, the child must be immobilized. It is important to emphasize to the child that at no time is the procedure painful. Pain medication is not required; however, sedation is sometimes necessary. The child will not be allowed to move and will be immobilized. Someone is able to remain with the child during the procedure."
+                },
+                {
+                    question: "What is a nursing intervention to reduce the risk of increasing intracranial pressure (ICP) in an unconscious child?",
+                    options: ["Suction the child frequently.", "Turn the child's head side to side every hour.", "Provide environmental stimulation.", "Avoid activities that cause pain or crying."],
+                    correct: 3,
+                    rationale: "Unrelieved pain, crying, and emotional stress all contribute to increasing the ICP. Disturbing procedures should be carried out at the same time as therapies that reduce ICP, such as sedation. Suctioning is poorly tolerated by children. When necessary, it is preceded by hyperventilation with 100% oxygen. Turning the head side to side is contraindicated for fear of compressing the jugular vein. This would block the flow of blood from the brain, raising ICP. Nontherapeutic touch and environmental stimulation increase ICP. Minimizing both touch and environmental stimuli noise reduces ICP."
+                },
+                {
+                    question: "What nursing intervention is appropriate when caring for an unconscious child?",
+                    options: ["Avoid using narcotics or sedatives to provide comfort and pain relief.", "Change the child's position infrequently to minimize the chance of increased intracranial pressure (ICP).", "Monitor fluid intake and output carefully to avoid fluid overload and cerebral edema.", "Give tepid sponge baths to reduce fevers above 38.3 C (101 F) because antipyretics are contraindicated."],
+                    correct: 2,
+                    rationale: "Often comatose patients cannot cope with the quantity of fluids that they normally tolerate. Overhydration must be avoided to prevent fatal cerebral edema. Narcotics and sedatives should be used as necessary to reduce pain and anxiety, which can increase ICP. The child's position should be changed frequently to avoid complications such as pneumonia and skin breakdown. Antipyretics are the method of choice for fever reduction."
+                },
+                {
+                    question: "What statement is descriptive of a concussion?",
+                    options: ["Petechial hemorrhages cause amnesia.", "Visible bruising and tearing of cerebral tissue occur.", "It is a transient and reversible neuronal dysfunction.", "It is a slight lesion that develops remote from the site of trauma."],
+                    correct: 2,
+                    rationale: "A concussion is a transient, reversible neuronal dysfunction with instantaneous loss of awareness and responsiveness resulting from trauma to the head. Petechial hemorrhages on the superficial aspects of the brain along the point of impact are a type of contusion but are not necessarily associated with amnesia. A contusion is visible bruising and tearing of cerebral tissue. Contrecoup is a lesion that develops remote from the site of trauma as a result of an acceleration-deceleration injury."
+                },
+                {
+                    question: "What statement best describes a subdural hematoma?",
+                    options: ["Bleeding occurs between the dura and the skull.", "Bleeding occurs between the dura and the cerebrum.", "Bleeding is generally arterial, and brain compression occurs rapidly.", "The hematoma commonly occurs in the parietotemporal region."],
+                    correct: 1,
+                    rationale: "A subdural hematoma is bleeding that occurs between the dura and the cerebrum as a result of a rupture of cortical veins that bridge the subdural space. An epidural hemorrhage occurs between the dura and the skull, is usually arterial with rapid brain concussion, and occurs most often in the parietotemporal region."
+                },
+                {
+                    question: "A 10-year-old boy on a bicycle has been hit by a car in front of a school. The school nurse immediately assesses airway, breathing, and circulation. What should be the next nursing action?",
+                    options: ["Place the child on his side.", "Take the child's blood pressure.", "Stabilize the child's neck and spine.", "Check the child's scalp and back for bleeding."],
+                    correct: 2,
+                    rationale: "After determining that the child is breathing and has adequate circulation, the next action is to stabilize the neck and spine to prevent any additional trauma. The child's position should not be changed until the neck and spine are stabilized. Blood pressure is a later assessment. A less urgent but important assessment is inspection of the scalp for bleeding."
+                },
+                {
+                    question: "A school-age child has sustained a head injury and multiple fractures after being thrown from a horse. The child's level of consciousness is variable. The parents tell the nurse that they think their child is in pain because of periodic crying and restlessness. What is the most appropriate nursing action?",
+                    options: ["Explain that analgesia is contraindicated with a head injury.", "Have the parents describe the child's previous experiences with pain.", "Consult with a practitioner about what analgesia can be safely administered.", "Teach the parents that analgesia is unnecessary when the child is not fully awake and alert."],
+                    correct: 2,
+                    rationale: "A key nursing role is to provide sedation and analgesia for the child. Consultation with the appropriate practitioner is necessary to avoid conflict between the necessity to monitor the child's neurologic status and to promote comfort and relieve anxiety. Analgesia can be safely used in individuals who have sustained head injuries. The child's previous experiences with pain should be obtained as part of the assessment, but because of the severity of the injury, analgesia should be provided as soon as possible. Analgesia can decrease anxiety and resultant increased intracranial pressure."
+                },
+                {
+                    question: "The nurse is assessing a child who was just admitted to the hospital for observation after a head injury. What clinical manifestation is the most essential part of the nursing assessment to detect early signs of a worsening condition?",
+                    options: ["Posturing", "Vital signs", "Focal neurologic signs", "Level of consciousness"],
+                    correct: 3,
+                    rationale: "The most important nursing observation is assessment of the child's level of consciousness. Alterations in consciousness appear earlier in the progression of an injury than do alterations of vital signs or focal neurologic signs. Neurologic posturing is indicative of neurologic damage."
+                },
+                {
+                    question: "A 5-year-old girl sustained a concussion when she fell out of a tree. In preparation for discharge, the nurse is discussing home care with her mother. What sign or symptom is considered a manifestation of postconcussion syndrome and does not necessitate medical attention?",
+                    options: ["Vomiting", "Blurred vision", "Behavioral changes", "Temporary loss of consciousness"],
+                    correct: 2,
+                    rationale: "The parents are advised of probable posttraumatic symptoms that may be expected. These include behavioral changes, sleep disturbances, emotional lability, and alterations in school performance. If the child is vomiting, has blurred vision, or has temporary loss of consciousness, she should be seen for evaluation."
+                },
+                {
+                    question: "An 18-month-old child is brought to the emergency department after being found unconscious in the family pool. What does the nurse identify as the primary problem in drowning incidents?",
+                    options: ["Hypoxia", "Aspiration", "Hypothermia", "Electrolyte imbalance"],
+                    correct: 0,
+                    rationale: "Hypoxia is the primary problem because it results in global cell damage, with different cells tolerating variable lengths of anoxia. Neurons sustain irreversible damage after 4 to 6 minutes of submersion. Severe neurologic damage occurs from hypoxia in 3 to 6 minutes. Aspiration of fluid does occur, resulting in pulmonary edema, atelectasis, airway spasm, and pneumonitis, which complicate the anoxia. Hypothermia occurs rapidly, except in hot tubs. Electrolyte imbalances do result, but they are not a major cause of morbidity and mortality."
+                },
+                {
+                    question: "The mother of a 1-month-old infant tells the nurse she worries that her baby will get meningitis like the child's younger brother had when he was an infant. The nurse should base a response on which information?",
+                    options: ["Meningitis rarely occurs during infancy.", "Often a genetic predisposition to meningitis is found.", "Vaccination to prevent all types of meningitis is now available.", "Vaccinations to prevent pneumococcal and Haemophilus influenzae type B meningitis are available."],
+                    correct: 3,
+                    rationale: "H. influenzae type B meningitis has been virtually eradicated in areas of the world where the vaccine is administered routinely. Bacterial meningitis remains a serious illness in children. It is significant because of the residual damage caused by undiagnosed and untreated or inadequately treated cases. The leading causes of neonatal meningitis are the group B streptococci and Escherichia coli organisms. Meningitis is an extension of a variety of bacterial infections. No genetic predisposition exists. Vaccinations are not available for all of the potential causative organisms."
+                },
+                {
+                    question: "A toddler is admitted to the pediatric unit with presumptive bacterial meningitis. The initial orders include isolation, intravenous access, cultures, and antimicrobial agents. The nurse knows that antibiotic therapy will begin when?",
+                    options: ["After the diagnosis is confirmed", "When the medication is received from the pharmacy", "After the child's fluid and electrolyte balance is stabilized", "As soon as the practitioner is notified of the culture results"],
+                    correct: 1,
+                    rationale: "Antimicrobial therapy is begun as soon as a presumptive diagnosis is made. The choice of drug is based on the most likely infective agent. Drug choice may be adjusted when the culture results are obtained. Waiting for culture results to begin therapy increases the risk of neurologic damage. Although fluid and electrolyte balance is important, there is no indication that this child is unstable. Antibiotic therapy would be a priority intervention."
+                },
+                {
+                    question: "The nurse is planning care for a school-age child with bacterial meningitis. What intervention should be included?",
+                    options: ["Keep environmental stimuli to a minimum.", "Have the child move her head from side to side at least every 2 hours.", "Avoid giving pain medications that could dull sensorium.", "Measure head circumference to assess developing complications."],
+                    correct: 0,
+                    rationale: "The room is kept as quiet as possible and environmental stimuli are kept to a minimum. Most children with meningitis are sensitive to noise, bright lights, and other external stimuli. The nuchal rigidity associated with meningitis would make moving the head from side to side a painful intervention. If pain is present, the child should be treated appropriately. Failure to treat can cause increased intracranial pressure. In this age group, the head circumference does not change. Signs of increased intracranial pressure would need to be assessed."
+                },
+                {
+                    question: "A young child's parents call the nurse after their child is bitten by a raccoon in the woods. The nurse's recommendation should be based on what knowledge?",
+                    options: ["Antirabies prophylaxis must be initiated immediately.", "The child should be hospitalized for close observation.", "No treatment is necessary if thorough wound cleaning is done.", "Antirabies prophylaxis must be initiated as soon as clinical manifestations appear."],
+                    correct: 0,
+                    rationale: "Current therapy for a rabid animal bite consists of a thorough cleansing of the wound and passive immunization with human rabies immunoglobulin (HRIG) as soon as possible. Hospitalization is not necessary. The wound cleansing, passive immunization, and immunoglobulin administration can be done as an outpatient. The child needs to receive both HRIG and rabies vaccine."
+                },
+                {
+                    question: "What intervention should be beneficial in reducing the risk of Reye syndrome?",
+                    options: ["Immunization against the disease", "Medical attention for all head injuries", "Prompt treatment of bacterial meningitis", "Avoidance of aspirin for children with varicella or those suspected of having influenza"],
+                    correct: 3,
+                    rationale: "Although the etiology of Reye syndrome is obscure, most cases follow a common viral illness, either varicella or influenza. A potential association exists between aspirin therapy and the development of Reye syndrome, so use of aspirin is avoided. No immunization currently exists for Reye syndrome. Reye syndrome is not correlated with head injuries or bacterial meningitis."
+                },
+                {
+                    question: "What term refers to seizures that involve both hemispheres of the brain?",
+                    options: ["Absence", "Acquired", "Generalized", "Complex partial"],
+                    correct: 2,
+                    rationale: "Clinical observations of generalized seizures indicate that the initial involvement is from both hemispheres. Absence seizures have a sudden onset and are characterized by a brief loss of consciousness, a blank stare, and automatisms. Acquired seizure disorder is a result of a brain injury from a variety of factors; it is not a term that labels the type of seizure. Complex partial seizures are the most common seizures. They may begin with an aura and be manifested as repetitive involuntary activities without purpose, carried out in a dreamy state."
+                },
+                {
+                    question: "What is the initial clinical manifestation of generalized seizures?",
+                    options: ["Confusion", "Feeling frightened", "Loss of consciousness", "Seeing flashing lights"],
+                    correct: 2,
+                    rationale: "Loss of consciousness is a frequent occurrence in generalized seizures and is the initial clinical manifestation. Being confused, feeling frightened, and seeing flashing lights are clinical manifestations of a complex partial seizure."
+                },
+                {
+                    question: "What type of seizure may be difficult to detect?",
+                    options: ["Absence", "Generalized", "Simple partial", "Complex partial"],
+                    correct: 0,
+                    rationale: "Absence seizures may go unrecognized because little change occurs in the child's behavior during the seizure. Generalized, simple partial, and complex partial all have clinical manifestations that are observable."
+                },
+                {
+                    question: "What is important to incorporate in the plan of care for a child who is experiencing a seizure?",
+                    options: ["Describe and record the seizure activity observed.", "Suction the child during a seizure to prevent aspiration.", "Place a tongue blade between the teeth if they become clenched.", "Restrain the child when seizures occur to prevent bodily harm."],
+                    correct: 0,
+                    rationale: "When a child is having a seizure, the priority nursing care is observation of the child and seizure. The nurse then describes and records the seizure activity. The child is not suctioned during the seizure. If possible, the child should be placed on the side, facilitating drainage to prevent aspiration."
+                },
+                {
+                    question: "A 10-year-old child, without a history of previous seizures, experiences a tonic-clonic seizure at school that lasts more than 5 minutes. Breathing is not impaired. Some postictal confusion occurs. What is the most appropriate initial action by the school nurse?",
+                    options: ["Stay with child and have someone else call emergency medical services (EMS).", "Notify the parent and regular practitioner.", "Notify the parent that the child should go home.", "Stay with the child, offering calm reassurance."],
+                    correct: 0,
+                    rationale: "Because this is the child's first seizure and it lasted more than 5 minutes, EMS should be called to transport the child, and evaluation should be performed as soon as possible. The nurse should stay with the recovering child while someone else notifies EMS."
+                },
+                {
+                    question: "A child has been seizure free for 2 years. A father asks the nurse how much longer the child will need to take the antiseizure medications. How should the nurse respond?",
+                    options: ["Medications can be discontinued at this time.", "The child will need to take the drugs for 5 years after the last seizure.", "A step-wise approach will be used to reduce the dosage gradually.", "Seizure disorders are a lifelong problem. Medications cannot be discontinued."],
+                    correct: 2,
+                    rationale: "A predesigned protocol is used to wean a child gradually off antiseizure medications, usually when the child is seizure free for 2 years. Medications must be gradually reduced to minimize the recurrence of seizures. The risk of recurrence is greatest within 6 months after discontinuation."
+                },
+                {
+                    question: "A young adolescent experiences infrequent migraine episodes. What pharmacologic intervention is most likely to be prescribed?",
+                    options: ["Opioid", "Lorazepam", "Ergotamine", "Sumatriptan"],
+                    correct: 3,
+                    rationale: "Sumatriptan is a serotonin agonist at specific vascular serotonin receptor sites and causes vasoconstriction in large intracranial arteries. Opioids are used infrequently because they rarely work on the mechanism of pain. Lorazepam is a benzodiazepine that acts as an anxiolytic and sedative. It is not indicated for treatment of migraine episodes. Ergotamine, an a-adrenergic blocker, is used for adult vascular headaches, but it is not used in adolescents because of the side effects."
+                },
+                {
+                    question: "The nurse is teaching the parents of a 3-year-old child who has been diagnosed with tonic-clonic seizures. What statement by the parent should indicate a correct understanding of the teaching?",
+                    options: ["I should attempt to restrain my child during a seizure.", "My child will need to avoid contact sports until adulthood.", "I should place a pillow under my child's head during a seizure.", "My child will need to be taken to the emergency department [ED] after each seizure."],
+                    correct: 2,
+                    rationale: "Parents should try to place a pillow or folded blanket under the child's head for protection. The parent should not try to restrain the child during the seizure. The child does not need to go to the ED with each seizure; the nurse can teach parents certain criteria for when their child would need to be seen. Discussing what will happen in adulthood is not appropriate at this time."
+                },
+                {
+                    question: "The nurse is caring for a 10-year-old child who has an acute head injury, has a pediatric Glasgow Coma Scale score of 9, and is unconscious. What intervention should the nurse include in the child's care plan?",
+                    options: ["Elevate the head of the bed 15 to 30 degrees with the head maintained in midline.", "Maintain an active, stimulating environment.", "Perform chest percussion and suctioning every 1 to 2 hours.", "Perform active range of motion and nontherapeutic touch every 8 hours."],
+                    correct: 0,
+                    rationale: "Nursing activities for children with head trauma and increased intracranial pressure (ICP) include elevating the head of the bed 15 to 30 degrees and maintaining the head in a midline position. The nurse should try to maintain a quiet, nonstimulating environment for a child with increased ICP. Chest percussion and suctioning should be performed judiciously because they can elevate ICP. Range of motion should be passive and nontherapeutic touch should be avoided because both of these activities can increase ICP."
+                },
+                {
+                    question: "What clinical manifestations suggest hydrocephalus in an infant?",
+                    options: ["Closed fontanel and high-pitched cry", "Bulging fontanel and dilated scalp veins", "Constant low-pitched cry and restlessness", "Depressed fontanel and decreased blood pressure"],
+                    correct: 1,
+                    rationale: "Bulging fontanels, dilated scalp veins, and separated sutures are clinical manifestations of hydrocephalus in neonates. A closed fontanel, high-pitched cry, constant low-pitched cry, restlessness, a depressed fontanel, and decreased blood pressure are not clinical manifestations of hydrocephalus, but all should be referred for evaluation."
+                },
+                {
+                    question: "A pregnant woman asks about prenatal diagnosis of hydrocephalus. The nurse's response should be based on which knowledge?",
+                    options: ["It can be diagnosed only after birth.", "It can be diagnosed by chromosome studies.", "It can be diagnosed with fetal ultrasonography.", "It can be diagnosed by measuring the lecithin-to-sphingomyelin ratio."],
+                    correct: 2,
+                    rationale: "Hydrocephalus can be diagnosed by fetal ultrasonography as early as 14 weeks of gestation. Most incidents of hydrocephalus are not chromosomal in origin. The lecithin-to-sphingomyelin ratio can be used to determine fetal lung maturity."
+                },
+                {
+                    question: "A child is admitted for revision of a ventriculoperitoneal shunt for noncommunicating hydrocephalus. What is a common reason for elective revision of this shunt?",
+                    options: ["Meningitis", "Gastrointestinal upset", "Hydrocephalus resolution", "Growth of the child since the initial shunting"],
+                    correct: 3,
+                    rationale: "An elective revision of a ventriculoperitoneal shunt would most likely be done to accommodate the child's growth. Meningitis would require an emergent replacement or revision of the shunt. Gastrointestinal upset alone would not indicate the need for shunt revision. Noncommunicating hydrocephalus will not resolve without surgical intervention."
+                },
+                {
+                    question: "What is a priority of care when a child has an external ventricular drain (EVD)?",
+                    options: ["Irrigation of drain to maintain flow", "As-needed dressing changes if dressing becomes wet", "Frequent assessment of amount and color of drainage", "Maintaining the EVD below the level of the child's head"],
+                    correct: 2,
+                    rationale: "The EVD is inserted into the child's ventricle. Frequent assessment is necessary to determine amount of drainage and whether an infection is present. The EVD is a closed system and is not opened for irrigation. Antibiotics may be administered through the drain, but this is usually done by the neuropractitioner. The dressing is not changed. If it becomes wet, then the practitioner should be notified that cerebrospinal fluid (CSF) may be leaking. Unless ordered, maintaining the EVD below the level of the child's head position will create too much pressure and potentially drain too much CSF."
+                },
+                {
+                    question: "The nurse is discussing long-term care with the parents of a child who has a ventriculoperitoneal shunt. What issues should be addressed?",
+                    options: ["Most childhood activities must be restricted.", "Cognitive impairment is to be expected with hydrocephalus.", "Wearing head protection is essential until the child reaches adulthood.", "Shunt malfunction or infection requires immediate treatment."],
+                    correct: 3,
+                    rationale: "Because of the potentially severe sequelae, symptoms of shunt malfunction or infection must be assessed and treated immediately. Limits should be appropriate to the child's developmental age. Except for contact sports, the child will have few restrictions. Cognitive impairment depends on the extent of damage before the shunt was placed."
+                },
+                {
+                    question: "A 6-year-old child is admitted for revision of a ventriculoperitoneal shunt for noncommunicating hydrocephalus. What sign or symptom does the child have that indicates a revision is necessary?",
+                    options: ["Tachycardia", "Gastrointestinal upset", "Hypotension", "Alteration in level of consciousness"],
+                    correct: 3,
+                    rationale: "In older children, who are usually admitted to the hospital for elective or emergency shunt revision, the most valuable indicators of increasing intracranial pressure are an alteration in the child's level of consciousness, complaint of headache, and changes in interaction with the environment."
+                },
+                {
+                    question: "After a tonic-clonic seizure, what symptoms should the nurse expect the child to experience?",
+                    options: ["Diarrhea and abdominal discomfort", "Irritability and hunger", "Lethargy and confusion", "Nervousness and excitability"],
+                    correct: 2,
+                    rationale: "In the postictal phase, after a tonic-clonic seizure, the child may remain semiconscious and difficult to arouse. The average duration of the postictal phase is usually 30 minutes. The child may remain confused or sleep for several hours. He or she may have mild impairment of fine motor movements. The child may have visual and speech difficulties and may vomit or complain of headache."
+                },
+                {
+                    question: "What is the antiepileptic medication that requires monitoring of vitamin D and folic acid?",
+                    options: ["Topiramate (Topamax)", "Valproic acid (Depakene)", "Gabapentin (Neurontin)", "Phenobarbital (Luminal)"],
+                    correct: 3,
+                    rationale: "Children taking phenobarbital or phenytoin should receive adequate vitamin D and folic acid because deficiencies of both have been associated with these drugs."
+                },
+                {
+                    question: "A 2-year-old child starts to have a tonic-clonic seizure. The child's jaws are clamped. What is the most important nursing action at this time?",
+                    options: ["Place a padded tongue blade between the child's jaws.", "Stay with the child and observe his respiratory status.", "Prepare the suction equipment.", "Restrain the child to prevent injury."],
+                    correct: 1,
+                    rationale: "It is impossible to halt a seizure once it has begun, and no attempt should be made to do so. The nurse must remain calm, stay with the child, and prevent the child from sustaining any harm during the seizure. The nurse should not move or forcefully restrain the child during a tonic-clonic seizure and should not place a solid object between the teeth. Suctioning may be needed but not until the seizure has ended."
+                },
+                {
+                    question: "A child has been admitted with status epilepticus. An emergency medication has been ordered. What medication should the nurse expect to be prescribed?",
+                    options: ["Lorazepam (Ativan)", "Phenytoin (Dilantin)", "Topiramate (Topamax)", "Ethosuximide (Zarontin)"],
+                    correct: 0,
+                    rationale: "For in-hospital management of status epilepticus, intravenous diazepam or lorazepam (Ativan) is the first-line drug of choice. Lorazepam is the preferred agent because of its rapid onset (2-5 minutes) and long half-life (12-24 hours) with few side effects."
+                },
+                {
+                    question: "A child is on phenytoin (Dilantin). What should the nurse encourage?",
+                    options: ["Fluid restriction", "Good dental hygiene", "A decrease in vitamin D intake", "Taking the medication with milk"],
+                    correct: 1,
+                    rationale: "Chronic treatment with phenytoin may cause gum hypertrophy. Children taking phenobarbital or phenytoin should receive adequate vitamin D and folic acid because deficiencies of both have been associated with these drugs. The medication should not be taken with milk, and fluids should be encouraged, not restricted."
+                },
+                {
+                    question: "A child has a seizure disorder. What test should be done to gather the most specific information about the type of seizure the child is having?",
+                    options: ["Sleep study", "Skull radiography", "Serum electrolytes", "Electroencephalogram (EEG)"],
+                    correct: 3,
+                    rationale: "An EEG is obtained for all children with seizures and is the most useful tool for evaluating a seizure disorder. The EEG confirms the presence of abnormal electrical discharges and provides information on the seizure type and the focus. The EEG is carried out under varying conditions—with the child asleep, awake, awake with provocative stimulation (flashing lights, noise), and hyperventilating. Stimulation may elicit abnormal electrical activity, which is recorded on the EEG. Various seizure types produce characteristic EEG patterns."
+                },
+                {
+                    question: "A child develops syndrome of inappropriate antidiuretic hormone secretion (SIADH) as a complication to meningitis. What action should be verified before implementing?",
+                    options: ["Forcing fluids", "Daily weights with strict input and output (I and O)", "Strict monitoring of urine volume and specific gravity", "Close observation for signs of increasing cerebral edema"],
+                    correct: 0,
+                    rationale: "The treatment of SIADH consists of fluid restriction until serum electrolytes and osmolality return to normal levels. SIADH often occurs in children who have meningitis. Monitoring weights, keeping I and O and specific gravity of urine, and observing for signs of increasing cerebral edema are all part of the nursing care for a child with SIADH."
+                },
+                {
+                    question: "When taking the history of a child hospitalized with Reye syndrome, the nurse should not be surprised if a week ago the child had recovered from what?",
+                    options: ["Measles", "Influenza", "Meningitis", "Hepatitis"],
+                    correct: 1,
+                    rationale: "The etiology of Reye syndrome is not well understood, but most cases follow a common viral illness, typically influenza or varicella."
+                },
+                {
+                    question: "If an intramuscular (IM) injection is administered to a child who has Reye syndrome, the nurse should monitor for what?",
+                    options: ["Bleeding", "Infection", "Poor absorption", "Itching at the injection site"],
+                    correct: 0,
+                    rationale: "The nurse should watch for bleeding from the site. Because of related liver dysfunction with Reye syndrome, laboratory studies, such as prolonged bleeding time, should be monitored to determine impaired coagulation."
+                },
+                {
+                    question: "A 23-month-old child is admitted to the hospital with a diagnosis of meningitis. She is lethargic and very irritable with a temperature of 102 F. What should the nurse's care plan include?",
+                    options: ["Observing the child's voluntary movement", "Checking the Babinski reflex every 4 hours", "Checking the Brudzinski reflex every 1 hour", "Assessing the level of consciousness (LOC) and vital signs every 2 hours"],
+                    correct: 3,
+                    rationale: "Observation of vital signs, neurologic signs, LOC, urinary output, and other pertinent data is carried out at frequent intervals on a child with meningitis. The nurse should avoid actions that cause pain or increase discomfort, such as lifting the child's head, so the Brudzinski reflex should not be checked hourly. Checking the Babinski reflex or child's voluntary movements will not help with assessing the child's status."
+                },
+                {
+                    question: "A lumbar puncture (LP) is being done on an infant with suspected meningitis. The nurse expects which results for the cerebrospinal fluid that can confirm the diagnosis of meningitis?",
+                    options: ["↑WBCs; ↓glucose", "↑RBCs; normal WBCs", "↓glucose; normal RBCs", "Normal RBCs; normal glucose"],
+                    correct: 0,
+                    rationale: "A lumbar puncture is the definitive diagnostic test. The fluid pressure is measured and samples are obtained for culture, Gram stain, blood cell count, and determination of glucose and protein content. The findings are usually diagnostic. The patient generally has an elevated white blood cell count, often predominantly polymorphonuclear leukocytes. The glucose level is reduced, generally in proportion to the duration and severity of the infection."
+                }
+            ],
+            
+            'multiple-response': [
+                {
+                    question: "The nurse is preparing to admit a 6-month-old infant with increased intracranial pressure (ICP). What clinical manifestations should the nurse expect to observe in this infant? (Select all that apply.)",
+                    options: ["High-pitched cry", "Poor feeding", "Setting-sun sign", "Sunken fontanel", "Distended scalp veins", "Decreased head circumference"],
+                    correct: [0, 1, 2, 4],
+                    rationale: "Clinical manifestations of increased ICP in an infant include a high-pitched cry, poor feeding, setting-sun sign, and distended scalp veins. The infant would have a tense, bulging fontanel and an increased head circumference."
+                },
+                {
+                    question: "The nurse is caring for a child with increased intracranial pressure (ICP). What interventions should the nurse plan for this child? (Select all that apply.)",
+                    options: ["Avoid jarring the bed.", "Keep the room brightly lit.", "Keep the bed in a flat position.", "Administer prescribed stool softeners.", "Administer a prescribed antiemetic for nausea."],
+                    correct: [0, 3, 4],
+                    rationale: "Other measures to relieve discomfort for a child with ICP include providing a quiet, dimly lit environment; limiting visitors; preventing any sudden, jarring movement, such as banging into the bed; and preventing an increase in ICP. The latter is most effectively achieved by proper positioning and prevention of straining, such as during coughing, vomiting, or defecating. An antiemetic should be administered to prevent vomiting, and stool softeners should be prescribed to prevent straining with bowel movements. The head of the bed should be elevated 15 to 30 degrees."
+                },
+                {
+                    question: "The nurse is preparing to admit a 5-year-old with an epidural hemorrhage. What clinical manifestations should the nurse expect to observe? (Select all that apply.)",
+                    options: ["Headache", "Vomiting", "Irritability", "Cephalhematoma", "Pallor with anemia"],
+                    correct: [0, 1, 2],
+                    rationale: "The classic clinical picture of an epidural hemorrhage is a lucid interval (momentary unconsciousness) followed by a normal period for several hours, and then lethargy or coma due to blood accumulation in the epidural space and compression of the brain. The child may be seen with varying degrees of impaired consciousness depending on the severity of the traumatic injury. Common symptoms in a child with no neurologic deficit are irritability, headache, and vomiting. In infants younger than 1 year of age, the most common symptoms are irritability, pallor with anemia, and cephalhematoma."
+                },
+                {
+                    question: "The nurse is caring for a child with a subdural hematoma. The nurse should assess for what signs that can indicate brainstem compression? (Select all that apply.)",
+                    options: ["Coma", "Lethargy", "Hemiplegia", "Hemiparesis", "Unequal pupils"],
+                    correct: [2, 3, 4],
+                    rationale: "Hemiparesis, hemiplegia, and anisocoria (unequal pupils) are signs of brainstem compression and require emergency treatment targeted at decreasing increased intracranial pressure. Coma and lethargy are seen with a subdural hematoma but do not indicate a brainstem compression."
+                },
+                {
+                    question: "The nurse is preparing to admit a neonate with bacterial meningitis. What clinical manifestations should the nurse expect to observe? (Select all that apply.)",
+                    options: ["Jaundice", "Cyanosis", "Poor tone", "Nuchal rigidity", "Poor sucking ability"],
+                    correct: [0, 1, 2, 4],
+                    rationale: "Clinical manifestations of bacterial meningitis in a neonate include jaundice, cyanosis, poor tone, and poor sucking ability. The neck is usually supple in neonates with meningitis, and there is no nuchal rigidity."
+                },
+                {
+                    question: "The nurse is preparing to admit an adolescent with bacterial meningitis. What clinical manifestations should the nurse expect to observe? (Select all that apply.)",
+                    options: ["Fever", "Chills", "Headache", "Poor tone", "Drowsiness"],
+                    correct: [0, 1, 2, 4],
+                    rationale: "Clinical manifestations of bacterial meningitis in an adolescent include, fever, chills, headache, and drowsiness. Hyperactivity is present, not poor tone."
+                },
+                {
+                    question: "The nurse is caring for a child with meningitis. What acute complications of meningitis should the nurse continuously assess the child for? (Select all that apply.)",
+                    options: ["Seizures", "Cerebral palsy", "Cerebral edema", "Hydrocephalus", "Cognitive impairments"],
+                    correct: [0, 2, 3],
+                    rationale: "Acute complications of meningitis include syndrome of inappropriate antidiuretic hormone (SIADH), subdural effusions, seizures, cerebral edema and herniation, and hydrocephalus. Long-term complications include cerebral palsy, cognitive impairments, learning disorder, attention deficit hyperactivity disorder, and seizures."
+                },
+                {
+                    question: "What cerebrospinal fluid (CSF) analysis should the nurse expect with viral meningitis? (Select all that apply.)",
+                    options: ["Color is turbid.", "Protein count is normal.", "Glucose is decreased.", "Gram stain findings are negative.", "White blood cell (WBC) count is slightly elevated."],
+                    correct: [1, 3, 4],
+                    rationale: "The CSF analysis in viral meningitis shows a normal or slightly elevated protein count, negative Gram stain, and a slightly elevated WBC. The color is clear or slightly cloudy, and the glucose level is normal."
+                },
+                {
+                    question: "The nurse is preparing to admit an adolescent with encephalitis. What clinical manifestations should the nurse expect to observe? (Select all that apply.)",
+                    options: ["Malaise", "Apathy", "Lethargy", "Hypoactivity", "Hypothermia"],
+                    correct: [0, 1, 2],
+                    rationale: "The clinical manifestations of encephalitis include malaise, apathy, and lethargy. There is hyperactivity, not hypoactivity, and hyperthermia, not hypothermia."
+                },
+                {
+                    question: "The nurse is preparing to admit a 7-year-old child with complex partial seizures. What clinical features of complex partial seizures should the nurse recognize? (Select all that apply.)",
+                    options: ["They last less than 10 seconds.", "There is usually no aura.", "Mental disorientation is common.", "There is frequently a postictal state.", "There is usually an impaired consciousness."],
+                    correct: [2, 3, 4],
+                    rationale: "Clinical features of complex partial seizures include the following: it is common to have mental disorientation, there is frequently a postictal state, and there is usually an impaired consciousness. These seizures last longer than 10 seconds (usually longer than 60 seconds), and there is usually an aura."
+                },
+                {
+                    question: "What effects of an altered pituitary secretion in a child with meningitis indicates syndrome of inappropriate antidiuretic hormone (SIADH)? (Select all that apply.)",
+                    options: ["Hypotension", "Serum sodium is decreased", "Urinary output is decreased", "Evidence of overhydration", "Urine specific gravity is increased"],
+                    correct: [1, 2, 3, 4],
+                    rationale: "The serum sodium is decreased, urinary output is decreased, evidence of overhydration is present, and urine specific gravity is increased in SIADH. Hypertension, not hypotension, occurs."
+                },
+                {
+                    question: "The nurse is caring for a child with an epidural hematoma. The nurse should assess for what signs that can indicate Cushing triad? (Select all that apply.)",
+                    options: ["Fever", "Flushing", "Bradycardia", "Systemic hypertension", "Respiratory depression"],
+                    correct: [2, 3, 4],
+                    rationale: "Cushing triad (systemic hypertension, bradycardia, and respiratory depression) is a late sign of impending brainstem herniation. Fever or flushing does not occur with Cushing triad."
+                },
+                {
+                    question: "The nurse is preparing to admit a 10-year-old child with absence seizures. What clinical features of absence seizures should the nurse recognize? (Select all that apply.)",
+                    options: ["There is no aura.", "There is a postictal state.", "They usually last longer than 30 seconds.", "There is a brief loss of consciousness.", "There is an occasional clonic movement."],
+                    correct: [0, 3, 4],
+                    rationale: "Clinical features of absence seizures include no auras, a brief loss of consciousness, and an occasional clonic movement. There is no postictal state, and the seizures rarely last longer than 30 seconds."
+                },
+                {
+                    question: "The nurse is teaching the parents of a child with a seizure disorder about the triggers that can cause a seizure. What should the nurse include in the teaching session? (Select all that apply.)",
+                    options: ["Cold", "Sugared drinks", "Emotional stress", "Flickering lights", "Hyperventilation"],
+                    correct: [2, 3, 4],
+                    rationale: "The most common factors that may trigger seizures in children include emotional stress, sleep deprivation, fatigue, fever, and physical exercise. Other precipitating factors include sleep, flickering lights, menstrual cycle, alcohol, heat, hyperventilation, and fasting. Cold and sugared drinks are not triggers for seizures."
+                }
+            ],
+            
+            'matching': [
+                {
+                    question: "Matching Exercise: Match each clinical definition with its correct term.",
+                    items: [
+                        "Which level of consciousness is defined as 'arousable with stimulation'?",
+                        "Which level of consciousness is defined as 'remaining in a deep sleep, responsive only to repeated stimulation'?",
+                        "Which level of consciousness is defined as 'impaired decision making'?",
+                        "Which level of consciousness is defined as 'confusion regarding time and place'?",
+                        "Which level of consciousness is defined as 'no motor or verbal response to noxious stimuli'?",
+                        "Which type of seizure involves both hemispheres of the brain?",
+                        "Which term refers to quick, jerky, grossly uncoordinated movements?",
+                        "Which term describes bleeding between the dura and the cerebrum?",
+                        "Which term refers to a transient, reversible neuronal dysfunction from head trauma?"
+                    ],
+                    options: ["Absence seizure", "Complex partial seizure", "Coma", "Confusion", "Disorientation", "Generalized seizure", "Obtundation", "Stupor", "Choreiform movements", "Subdural hematoma", "Concussion", "Epidural hematoma"],
+                    answers: [6, 7, 3, 4, 2, 5, 8, 9, 10],
+                    rationales: [
+                        "Obtundation describes a level of consciousness in which the child is arousable with stimulation.",
+                        "Stupor exists when the child remains in a deep sleep, responsive only to vigorous and repeated stimulation.",
+                        "Confusion involves impaired thinking, difficulty following commands, and poor decision-making.",
+                        "Disorientation specifically refers to confusion about time, place, or person.",
+                        "Coma is a state of unarousable unresponsiveness, with no purposeful movement or verbal response even to painful stimuli.",
+                        "Generalized seizures involve both hemispheres of the brain.",
+                        "Choreiform movements are quick, jerky, grossly uncoordinated, irregular movements.",
+                        "Subdural hematoma is bleeding that occurs between the dura and the cerebrum.",
+                        "Concussion is a transient, reversible neuronal dysfunction with instantaneous loss of awareness from head trauma."
+                    ]
+                }
+            ],
+            
+            'dosage': [
+                {
+                    question: "The health care provider has prescribed fosphenytoin (Cerebyx) 4 mg/kg/day divided every 12 hours for a child with a seizure disorder. The child weighs 55 lb. Calculate the dose (in mg) the nurse should administer for one dose.",
+                    options: ["40 mg", "50 mg", "60 mg", "100 mg"],
+                    correct: 1,
+                    rationale: "55 lb ÷ 2.2 = 25 kg. Total daily dose = 4 mg/kg × 25 kg = 100 mg/day. Divided q12h = 2 doses/day → 100 mg ÷ 2 = 50 mg/dose"
+                },
+                {
+                    question: "The health care provider has prescribed gabapentin (Neurontin) 30 mg/kg/day divided q 8 hours for a child with a seizure disorder. The child weighs 110 lb. Calculate the dose (in mg) the nurse should administer for one dose.",
+                    options: ["400 mg", "500 mg", "600 mg", "750 mg"],
+                    correct: 1,
+                    rationale: "110 lb ÷ 2.2 = 50 kg. Total daily dose = 30 mg/kg × 50 kg = 1500 mg/day. Divided q8h = 3 doses/day → 1500 mg ÷ 3 = 500 mg/dose"
+                },
+                {
+                    question: "The health care provider has prescribed valproic acid (Depakene) 30 mg/kg/day divided bid for a child with a seizure disorder. The child weighs 77 lb. Calculate the dose (in mg) the nurse should administer for one dose.",
+                    options: ["450 mg", "525 mg", "600 mg", "1050 mg"],
+                    correct: 1,
+                    rationale: "77 lb ÷ 2.2 = 35 kg. Total daily dose = 30 mg/kg × 35 kg = 1050 mg/day. Divided bid = 2 doses/day → 1050 mg ÷ 2 = 525 mg/dose"
+                },
+                {
+                    question: "The health care provider has prescribed carbamazepine (Tegretol) 20 mg/kg/day divided bid for a child with a seizure disorder. The child weighs 33 lb. Calculate the dose (in mg) the nurse should administer for one dose.",
+                    options: ["120 mg", "150 mg", "180 mg", "300 mg"],
+                    correct: 1,
+                    rationale: "33 lb ÷ 2.2 = 15 kg. Total daily dose = 20 mg/kg × 15 kg = 300 mg/day. Divided bid = 2 doses/day → 300 mg ÷ 2 = 150 mg/dose"
+                }
+            ]
+        };
+
+        let currentSection = 'multiple-choice';
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let selectedOptions = [];
+        let isSubmitted = false;
+        let answers = {
+            'multiple-choice': Array(sections['multiple-choice'].length).fill(null),
+            'multiple-response': Array(sections['multiple-response'].length).fill({selected: [], submitted: false}),
+            'matching': Array(sections['matching'][0].items.length).fill(null),
+            'dosage': Array(sections['dosage'].length).fill(null),
+            'all': Array(
+                sections['multiple-choice'].length + 
+                sections['multiple-response'].length + 
+                sections['matching'][0].items.length +
+                sections['dosage'].length
+            ).fill(null)
+        };
+
+        function setSection(section) {
+            currentSection = section;
+            currentQuestion = 0;
+            selectedOption = null;
+            selectedOptions = [];
+            isSubmitted = false;
+            
+            document.querySelectorAll('.section-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            loadQuestion();
+        }
+
+        function isMultipleResponseQuestion() {
+            if (currentSection === 'all') {
+                const questionData = getCurrentQuestionData();
+                return Array.isArray(questionData?.correct);
+            }
+            return currentSection === 'multiple-response';
+        }
+
+        function isMatchingSection() {
+            if (currentSection === 'all') {
+                const questionData = getCurrentQuestionData();
+                return questionData?.isMatching || false;
+            }
+            return currentSection === 'matching';
+        }
+
+        function isDosageSection() {
+            if (currentSection === 'all') {
+                const questionData = getCurrentQuestionData();
+                return questionData?.section === 'dosage';
+            }
+            return currentSection === 'dosage';
+        }
+
+        function getCurrentQuestionData() {
+            if (currentSection === 'all') {
+                if (currentQuestion < sections['multiple-choice'].length) {
+                    return {
+                        ...sections['multiple-choice'][currentQuestion],
+                        section: 'multiple-choice',
+                        originalIndex: currentQuestion
+                    };
+                } else if (currentQuestion < sections['multiple-choice'].length + sections['multiple-response'].length) {
+                    const idx = currentQuestion - sections['multiple-choice'].length;
+                    return {
+                        ...sections['multiple-response'][idx],
+                        section: 'multiple-response',
+                        originalIndex: idx
+                    };
+                } else if (currentQuestion < sections['multiple-choice'].length + sections['multiple-response'].length + sections['matching'][0].items.length) {
+                    const idx = currentQuestion - sections['multiple-choice'].length - sections['multiple-response'].length;
+                    const matchingData = sections['matching'][0];
+                    return {
+                        question: matchingData.items[idx],
+                        options: matchingData.options,
+                        correct: matchingData.answers[idx],
+                        rationale: matchingData.rationales ? matchingData.rationales[idx] : matchingData.rationale,
+                        isMatching: true,
+                        section: 'matching',
+                        originalIndex: idx
+                    };
+                } else {
+                    const idx = currentQuestion - sections['multiple-choice'].length - sections['multiple-response'].length - sections['matching'][0].items.length;
+                    return {
+                        ...sections['dosage'][idx],
+                        section: 'dosage',
+                        originalIndex: idx
+                    };
+                }
+            } else if (currentSection === 'matching') {
+                const matchingData = sections['matching'][0];
+                return {
+                    question: matchingData.items[currentQuestion],
+                    options: matchingData.options,
+                    correct: matchingData.answers[currentQuestion],
+                    rationale: matchingData.rationales ? matchingData.rationales[currentQuestion] : matchingData.rationale,
+                    isMatching: true
+                };
+            } else {
+                return sections[currentSection][currentQuestion];
+            }
+        }
+
+        function loadQuestion() {
+            const questionData = getCurrentQuestionData();
+            
+            if (!questionData) return;
+            
+            const isMatching = questionData.isMatching || false;
+            const isMultipleResponse = isMultipleResponseQuestion();
+            
+            // Update UI elements visibility
+            document.getElementById('matchingContainer').style.display = isMatching ? 'flex' : 'none';
+            document.getElementById('options').style.display = isMatching ? 'none' : 'flex';
+            document.getElementById('multipleSelectIndicator').style.display = isMultipleResponse ? 'block' : 'none';
+            document.getElementById('multipleSelectInstructions').style.display = isMultipleResponse ? 'block' : 'none';
+            document.getElementById('cancelBtn').classList.remove('show');
+            document.getElementById('submitBtn').style.display = isMultipleResponse ? 'flex' : 'none';
+            document.getElementById('questionNumber').textContent = currentQuestion + 1;
+            
+            let totalQuestions;
+            if (currentSection === 'all') {
+                totalQuestions = sections['multiple-choice'].length + 
+                               sections['multiple-response'].length + 
+                               sections['matching'][0].items.length +
+                               sections['dosage'].length;
+            } else if (currentSection === 'matching') {
+                totalQuestions = sections['matching'][0].items.length;
+            } else {
+                totalQuestions = sections[currentSection].length;
+            }
+            
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('counter').textContent = `${currentQuestion + 1}/${totalQuestions}`;
+            
+            if (isMatching) {
+                document.getElementById('matchingQuestion').textContent = questionData.question;
+                loadMatchingOptions(questionData);
+            } else {
+                document.getElementById('question').textContent = questionData.question;
+                loadOptions(questionData);
+            }
+            
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('rationale').classList.remove('show');
+            
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            const isLastQuestion = currentQuestion >= totalQuestions - 1;
+            document.getElementById('nextBtn').textContent = isLastQuestion ? 'Finish ➡️' : 'Next ➡️';
+            document.getElementById('nextBtn').disabled = true;
+            
+            // Load saved answer state
+            const storedAnswer = answers[currentSection][currentQuestion];
+            if (storedAnswer !== null && storedAnswer !== undefined) {
+                if (isMultipleResponse) {
+                    selectedOptions = storedAnswer.selected || [];
+                    isSubmitted = storedAnswer.submitted || false;
+                    
+                    if (isSubmitted) {
+                        showFeedbackForMultipleResponse(questionData);
+                        document.getElementById('nextBtn').disabled = false;
+                        document.getElementById('submitBtn').disabled = true;
+                    } else {
+                        highlightSelectedOptionsForMultipleResponse();
+                        document.getElementById('submitBtn').disabled = selectedOptions.length === 0;
+                        document.getElementById('nextBtn').disabled = false;
+                        if (selectedOptions.length > 0) {
+                            document.getElementById('cancelBtn').classList.add('show');
+                        }
+                    }
+                } else if (isMatching) {
+                    selectedOption = storedAnswer;
+                    highlightMatchingOption(storedAnswer, questionData);
+                    showFeedback(storedAnswer, questionData);
+                    document.getElementById('nextBtn').disabled = false;
+                    document.getElementById('cancelBtn').classList.add('show');
+                } else {
+                    selectedOption = storedAnswer;
+                    highlightSelectedOption(storedAnswer, questionData);
+                    showFeedback(storedAnswer, questionData);
+                    document.getElementById('nextBtn').disabled = false;
+                    document.getElementById('cancelBtn').classList.add('show');
+                }
+            } else {
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                if (isMultipleResponse) {
+                    document.getElementById('submitBtn').disabled = true;
+                }
+            }
+        }
+
+        function loadMatchingOptions(questionData) {
+            const matchingOptions = document.getElementById('matchingOptions');
+            matchingOptions.innerHTML = '';
+            
+            questionData.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'matching-option';
+                optionDiv.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+                optionDiv.onclick = () => selectMatchingOption(index, questionData);
+                matchingOptions.appendChild(optionDiv);
+            });
+            
+            const storedAnswer = answers[currentSection][currentQuestion];
+            if (storedAnswer !== null && storedAnswer !== undefined) {
+                highlightMatchingOption(storedAnswer, questionData);
+            }
+        }
+
+        function loadOptions(questionData) {
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            questionData.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                optionElement.onclick = () => selectOption(index, questionData);
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        function selectOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            if (isMultipleResponseQuestion()) {
+                handleMultipleResponseSelect(index, questionData);
+            } else {
+                handleSingleSelect(index, questionData);
+            }
+        }
+
+        function handleSingleSelect(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            answers[currentSection][currentQuestion] = index;
+            selectedOption = index;
+            
+            highlightSelectedOption(index, questionData);
+            showFeedback(index, questionData);
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('cancelBtn').classList.add('show');
+        }
+
+        function handleMultipleResponseSelect(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            if (isSubmitted) return;
+            
+            const optionIndex = selectedOptions.indexOf(index);
+            if (optionIndex === -1) {
+                selectedOptions.push(index);
+            } else {
+                selectedOptions.splice(optionIndex, 1);
+            }
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (selectedOptions.includes(i)) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            if (!answers[currentSection][currentQuestion]) {
+                answers[currentSection][currentQuestion] = {selected: [], submitted: false};
+            }
+            answers[currentSection][currentQuestion].selected = selectedOptions;
+            answers[currentSection][currentQuestion].submitted = false;
+            
+            document.getElementById('submitBtn').disabled = selectedOptions.length === 0;
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('cancelBtn').classList.toggle('show', selectedOptions.length > 0);
+        }
+
+        function selectMatchingOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            answers[currentSection][currentQuestion] = index;
+            selectedOption = index;
+            
+            document.querySelectorAll('.matching-option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            const selectedOptionElement = document.querySelectorAll('.matching-option')[index];
+            selectedOptionElement.classList.add('selected');
+            
+            if (index === questionData.correct) {
+                selectedOptionElement.classList.add('correct');
+            } else {
+                selectedOptionElement.classList.add('incorrect');
+                document.querySelectorAll('.matching-option')[questionData.correct].classList.add('correct');
+            }
+            
+            showFeedback(index, questionData);
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('cancelBtn').classList.add('show');
+        }
+
+        function highlightMatchingOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const options = document.querySelectorAll('.matching-option');
+            
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (i === index) {
+                    option.classList.add('selected');
+                    if (i === questionData.correct) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                        options[questionData.correct].classList.add('correct');
+                    }
+                }
+            });
+        }
+
+        function highlightSelectedOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                
+                if (i === index) {
+                    if (i === questionData.correct) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                        options[questionData.correct].classList.add('correct');
+                    }
+                }
+            });
+        }
+
+        function highlightSelectedOptionsForMultipleResponse() {
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (selectedOptions.includes(i)) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        function submitAnswer() {
+            if (selectedOptions.length === 0) return;
+            
+            isSubmitted = true;
+            
+            if (!answers[currentSection][currentQuestion]) {
+                answers[currentSection][currentQuestion] = {selected: [], submitted: false};
+            }
+            answers[currentSection][currentQuestion].submitted = true;
+            
+            const questionData = getCurrentQuestionData();
+            showFeedbackForMultipleResponse(questionData);
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('cancelBtn').classList.remove('show');
+        }
+
+        function showFeedback(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackText = document.getElementById('feedbackText');
+            const rationale = document.getElementById('rationale');
+            const rationaleText = document.getElementById('rationaleText');
+            
+            if (index === questionData.correct) {
+                feedback.className = 'feedback correct';
+                feedbackIcon.textContent = '✅';
+                feedbackText.textContent = 'Correct! Well done.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '❌';
+                const correctLetter = String.fromCharCode(65 + questionData.correct);
+                feedbackText.textContent = `Incorrect. Correct: ${correctLetter}`;
+            }
+            
+            feedback.style.display = 'flex';
+            rationaleText.textContent = questionData.rationale;
+            rationale.classList.add('show');
+        }
+
+        function showFeedbackForMultipleResponse(questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackText = document.getElementById('feedbackText');
+            const rationale = document.getElementById('rationale');
+            const rationaleText = document.getElementById('rationaleText');
+            
+            const allCorrectSelected = questionData.correct.every(c => selectedOptions.includes(c));
+            const noIncorrectSelected = selectedOptions.every(s => questionData.correct.includes(s));
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (questionData.correct.includes(i)) {
+                    option.classList.add('correct');
+                }
+                if (selectedOptions.includes(i) && !questionData.correct.includes(i)) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            if (allCorrectSelected && noIncorrectSelected) {
+                feedback.className = 'feedback correct';
+                feedbackIcon.textContent = '✅';
+                feedbackText.textContent = 'Perfect! All correct selected.';
+            } else if (allCorrectSelected && !noIncorrectSelected) {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '⚠️';
+                feedbackText.textContent = 'Almost! All correct + some incorrect.';
+            } else if (!allCorrectSelected && noIncorrectSelected) {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '⚠️';
+                feedbackText.textContent = 'Partially correct! Some correct, missed others.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '❌';
+                feedbackText.textContent = 'Incorrect. Missed correct & selected incorrect.';
+            }
+            
+            feedback.style.display = 'flex';
+            rationaleText.textContent = questionData.rationale;
+            rationale.classList.add('show');
+        }
+
+        function cancelSelection() {
+            const questionData = getCurrentQuestionData();
+            
+            if (isMultipleResponseQuestion()) {
+                selectedOptions = [];
+                isSubmitted = false;
+                
+                const options = document.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                if (answers[currentSection][currentQuestion]) {
+                    answers[currentSection][currentQuestion] = {selected: [], submitted: false};
+                }
+                
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('rationale').classList.remove('show');
+                document.getElementById('cancelBtn').classList.remove('show');
+            } else if (isMatchingSection()) {
+                answers[currentSection][currentQuestion] = null;
+                selectedOption = null;
+                
+                document.querySelectorAll('.matching-option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('rationale').classList.remove('show');
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('cancelBtn').classList.remove('show');
+            } else {
+                answers[currentSection][currentQuestion] = null;
+                selectedOption = null;
+                
+                const options = document.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('rationale').classList.remove('show');
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('cancelBtn').classList.remove('show');
+            }
+        }
+
+        function nextCard() {
+            const totalQuestions = getTotalQuestions();
+            
+            if (currentQuestion < totalQuestions - 1) {
+                currentQuestion++;
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                loadQuestion();
+            } else {
+                let correctCount = 0;
+                let totalAnswered = 0;
+                
+                Object.keys(answers).forEach(section => {
+                    answers[section].forEach((answer, index) => {
+                        if (answer !== null) {
+                            totalAnswered++;
+                            const questionData = getQuestionData(section, index);
+                            
+                            if (Array.isArray(questionData?.correct)) {
+                                if (answer.submitted && Array.isArray(answer.selected)) {
+                                    const allCorrect = questionData.correct.every(c => answer.selected.includes(c));
+                                    const noIncorrect = answer.selected.every(s => questionData.correct.includes(s));
+                                    if (allCorrect && noIncorrect) correctCount++;
+                                }
+                            } else if (questionData?.isMatching) {
+                                if (answer === questionData.correct) correctCount++;
+                            } else {
+                                if (answer === questionData?.correct) correctCount++;
+                            }
+                        }
+                    });
+                });
+                
+                alert(`Quiz completed!\n\nAnswered: ${totalAnswered}\nCorrect: ${correctCount}\n\nClick OK to restart.`);
+                
+                currentSection = 'multiple-choice';
+                currentQuestion = 0;
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                answers = {
+                    'multiple-choice': Array(sections['multiple-choice'].length).fill(null),
+                    'multiple-response': Array(sections['multiple-response'].length).fill({selected: [], submitted: false}),
+                    'matching': Array(sections['matching'][0].items.length).fill(null),
+                    'dosage': Array(sections['dosage'].length).fill(null),
+                    'all': Array(
+                        sections['multiple-choice'].length + 
+                        sections['multiple-response'].length + 
+                        sections['matching'][0].items.length +
+                        sections['dosage'].length
+                    ).fill(null)
+                };
+                
+                setSection('multiple-choice');
+            }
+        }
+
+        function previousCard() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                const storedAnswer = answers[currentSection][currentQuestion];
+                
+                if (isMultipleResponseQuestion()) {
+                    selectedOptions = storedAnswer?.selected || [];
+                    isSubmitted = storedAnswer?.submitted || false;
+                } else {
+                    selectedOption = storedAnswer;
+                }
+                
+                loadQuestion();
+            }
+        }
+
+        function getTotalQuestions() {
+            if (currentSection === 'all') {
+                return sections['multiple-choice'].length + 
+                       sections['multiple-response'].length + 
+                       sections['matching'][0].items.length +
+                       sections['dosage'].length;
+            } else if (currentSection === 'matching') {
+                return sections['matching'][0].items.length;
+            } else {
+                return sections[currentSection].length;
+            }
+        }
+
+        function getQuestionData(section, index) {
+            if (section === 'all') {
+                if (index < sections['multiple-choice'].length) {
+                    return sections['multiple-choice'][index];
+                } else if (index < sections['multiple-choice'].length + sections['multiple-response'].length) {
+                    return sections['multiple-response'][index - sections['multiple-choice'].length];
+                } else if (index < sections['multiple-choice'].length + sections['multiple-response'].length + sections['matching'][0].items.length) {
+                    const matchingIndex = index - sections['multiple-choice'].length - sections['multiple-response'].length;
+                    const matchingData = sections['matching'][0];
+                    return {
+                        question: matchingData.items[matchingIndex],
+                        options: matchingData.options,
+                        correct: matchingData.answers[matchingIndex],
+                        rationale: matchingData.rationales ? matchingData.rationales[matchingIndex] : matchingData.rationale,
+                        isMatching: true
+                    };
+                } else {
+                    const dosageIndex = index - sections['multiple-choice'].length - sections['multiple-response'].length - sections['matching'][0].items.length;
+                    return sections['dosage'][dosageIndex];
+                }
+            } else if (section === 'matching') {
+                const matchingData = sections['matching'][0];
+                return {
+                    question: matchingData.items[index],
+                    options: matchingData.options,
+                    correct: matchingData.answers[index],
+                    rationale: matchingData.rationales ? matchingData.rationales[index] : matchingData.rationale,
+                    isMatching: true
+                };
+            } else {
+                return sections[section][index];
+            }
+        }
+
+        // Initialize
+        setSection('multiple-choice');
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.key >= '1' && event.key <= '5') {
+                const index = parseInt(event.key) - 1;
+                const questionData = getCurrentQuestionData();
+                if (!isMatchingSection()) {
+                    selectOption(index, questionData);
+                }
+            } else if (event.key >= 'a' && event.key <= 'e') {
+                const index = event.key.charCodeAt(0) - 97;
+                const questionData = getCurrentQuestionData();
+                if (!isMatchingSection()) {
+                    selectOption(index, questionData);
+                }
+            } else if (event.key === 'Enter' && isMultipleResponseQuestion()) {
+                if (selectedOptions.length > 0 && !isSubmitted) {
+                    submitAnswer();
+                }
+            } else if (event.key === 'ArrowLeft') {
+                if (!document.getElementById('prevBtn').disabled) {
+                    previousCard();
+                }
+            } else if (event.key === 'ArrowRight') {
+                if (!document.getElementById('nextBtn').disabled) {
+                    nextCard();
+                }
+            } else if (event.key === ' ' || event.key === 'Spacebar') {
+                if (!document.getElementById('nextBtn').disabled && !isMultipleResponseQuestion()) {
+                    nextCard();
+                }
+            } else if (event.key === 'Escape') {
+                cancelSelection();
+            }
+        });
+    </script>
+</body>
+</html>
